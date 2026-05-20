@@ -43,7 +43,8 @@ Environment variables:
 
 Set these secrets in the application repository:
 
-- `AWS_ROLE_TO_ASSUME`
+- `AWS_ACCESS_KEY_ID`
+- `AWS_SECRET_ACCESS_KEY`
 - `AWS_REGION`
 - `AWS_S3_BUCKET`
 - `CLOUDFRONT_DISTRIBUTION_ID`
