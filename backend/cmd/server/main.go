@@ -46,7 +46,7 @@ func main() {
 
 	server := &http.Server{
 		Addr:              ":" + cfg.Port,
-		Handler:           logging.Middleware(logger, router),
+		Handler:           logging.Middleware(logger, handlers.WithCORS(router)),
 		ReadHeaderTimeout: 5 * time.Second,
 	}
 
