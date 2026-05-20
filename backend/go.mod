@@ -1,9 +1,9 @@
 module github.com/starttech/starttech-application/backend
 
-go 1.22
+go 1.25
 
 require (
-	github.com/redis/go-redis/v9 v9.6.1
+	github.com/redis/go-redis/v9 v9.6.3
 	go.mongodb.org/mongo-driver v1.17.1
 )
 
