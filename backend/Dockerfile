@@ -1,18 +1,19 @@
 FROM golang:1.25.10-alpine AS build
 
 WORKDIR /src
+RUN apk add --no-cache ca-certificates
+
 COPY go.mod go.sum* ./
 RUN go mod download
 
 COPY . .
 RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o /out/starttech-api ./cmd/server
 
-FROM alpine:3.20
+FROM scratch
 
-RUN addgroup -S app && adduser -S app -G app
-WORKDIR /app
-COPY --from=build /out/starttech-api /app/starttech-api
+COPY --from=build /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
+COPY --from=build /out/starttech-api /starttech-api
 
-USER app
+USER 65532:65532
 EXPOSE 8080
-ENTRYPOINT ["/app/starttech-api"]
+ENTRYPOINT ["/starttech-api"]
